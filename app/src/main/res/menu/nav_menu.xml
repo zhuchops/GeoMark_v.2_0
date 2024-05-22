@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigationLayers"
+        android:icon="@drawable/layers_icon"
+        android:title="Слои"/>
+    <item
+        android:id="@+id/navigationMap"
+        android:icon="@drawable/map_icon"
+        android:title="Карта"/>
+    <item
+        android:id="@+id/navigationProfile"
+        android:icon="@drawable/profile_icon"
+        android:title="Профиль"/>
+</menu>

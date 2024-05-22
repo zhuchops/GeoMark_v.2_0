@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--  active item  -->
+    <item android:state_checked="true" android:state_pressed="true"
+        android:color="@color/pressed_active_navigation_icon" />
+    <item android:state_checked="true"
+        android:color="@color/active_navigation_icon" />
+
+    <!--  inactive item  -->
+    <item android:state_pressed="true"
+        android:color="@color/focused_navigation_icon" />
+    <item android:color="@color/inactive_navigation_icon"/>
+</selector>

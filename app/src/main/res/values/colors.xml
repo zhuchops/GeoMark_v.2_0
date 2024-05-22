@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="invisible">#00000000</color>
+    <color name="upper_menu_background">#FFEDEDED</color>
+    <color name="inactive_navigation_icon">#FF616161</color>
+    <color name="active_navigation_icon">#FF0099FF</color>
+    <color name="focused_navigation_icon">#FFCCCCCC</color>
+    <color name="pressed_active_navigation_icon">#FF66CCFF</color>
+    <color name="blackDemiInvisible">#80000000</color>
+    <color name="hint">#FF9C9C9C</color>
+    <color name="upper_panel_bg">#FFEDEDED</color>
+    <color name="checkedBoxPrimaryColor">#FF0099FF</color>
+    <color name="black_overlay">#66000000</color>
+</resources>

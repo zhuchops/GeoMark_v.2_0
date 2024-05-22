@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigationMap">
+
+    <fragment
+        android:id="@+id/navigationMap"
+        android:name="com.zhuchops.geomark_v20.views.HomeMapFragment"
+        android:label="Map">
+        <action
+            android:id="@+id/action_navigationMap_to_navigationLayers"
+            app:destination="@+id/navigationLayers"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigationLayers"
+        android:name="com.zhuchops.geomark_v20.views.LayersListFragment"
+        android:label="Layers"/>
+</navigation>
