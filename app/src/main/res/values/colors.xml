@@ -4,14 +4,34 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="invisible">#00000000</color>
-    <color name="upper_menu_background">#FFEDEDED</color>
     <color name="inactive_navigation_icon">#FF616161</color>
     <color name="active_navigation_icon">#FF0099FF</color>
     <color name="focused_navigation_icon">#FFCCCCCC</color>
     <color name="pressed_active_navigation_icon">#FF66CCFF</color>
     <color name="blackDemiInvisible">#80000000</color>
     <color name="hint">#FF9C9C9C</color>
-    <color name="upper_panel_bg">#FFEDEDED</color>
     <color name="checkedBoxPrimaryColor">#FF0099FF</color>
     <color name="black_overlay">#66000000</color>
+
+            <!--    blue theme    -->
+<!--    <color name="light_bg_color">#FFEBF7FF</color>-->
+<!--    <color name="dark_bg_color">#FF89B8D8</color>-->
+<!--    <color name="action_button_inner_color">#FF00538A</color>-->
+<!--    <color name="action_button_fill_color">#FFD3EEFF</color>-->
+<!--    <color name="focused_element_color">#FF4E80A1</color>-->
+<!--    <color name="unfocused_element_color">#FF616161</color>-->
+<!--    <color name="color_stroke">#FFD9D9D9</color>-->
+<!--    <color name="tab_bg_color">@color/white</color>-->
+            <!--  green theme  -->
+    <color name="light_bg_color">#FFE8FFD3</color>
+    <color name="dark_bg_color">#FF7fb154</color>
+    <color name="action_button_inner_color">#FF459000</color>
+    <color name="action_button_fill_color">#FFB9E195</color>
+    <color name="focused_element_color">#FF459000</color>
+    <color name="unfocused_element_color">#FF616161</color>
+    <color name="color_stroke">#FFD9D9D9</color>
+    <color name="nav_bar_bg_color">@color/light_bg_color</color>
+    <color name="upper_menu_bg_color">@color/light_bg_color</color>
+    <color name="tab_bg_color">@color/white</color>
+
 </resources>

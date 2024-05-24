@@ -28,4 +28,9 @@
     <string name="admit_text">подтвердить</string>
     <string name="map_text">Карта</string>
     <string name="layers_text">Слои</string>
+    <string name="text_description">Описание</string>
+    <string name="text_map">Карта</string>
+    <string name="text_my_layers">Мои слои</string>
+    <string name="text_shared_layers">Общие слои</string>
+    <string name="text_search">Поиск...</string>
 </resources>

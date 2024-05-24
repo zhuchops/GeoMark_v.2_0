@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class CurrentFragmentViewModel extends ViewModel {
+public class MainViewModel extends ViewModel {
     private final MutableLiveData<Class> currentFragment = new MutableLiveData<>();
 
     public void setCurrentFragment(Class fragmentClass) {
@@ -14,6 +14,4 @@ public class CurrentFragmentViewModel extends ViewModel {
     public LiveData<Class> getCurrentFragment() {
         return currentFragment;
     }
-
-
 }

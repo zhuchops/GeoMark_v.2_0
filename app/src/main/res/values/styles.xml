@@ -58,11 +58,35 @@
     </style>
     
     <style name="botNavBarStyle" parent="Widget.Material3.BottomNavigationView">
-        <item name="backgroundTint">@color/upper_menu_background</item>
-        <item name="elevation">10dp</item>
+        <item name="backgroundTint">@color/nav_bar_bg_color</item>
         <item name="itemIconTint">@color/navigation_icon_color_selector</item>
-        <item name="itemActiveIndicatorStyle">@color/navigation_icon_bg_color_selector</item>
+        <item name="itemActiveIndicatorStyle">@color/invisible</item>
         <item name="android:textStyle">bold</item>
         <item name="itemTextColor">@color/navigation_label_color_selector</item>
+        <item name="itemIconSize">24dp</item>
+        <item name="itemPaddingBottom">15dp</item>
+        <item name="itemPaddingTop">15dp</item>
+    </style>
+
+    <style name="floatingActionButtonStyle" parent="ThemeOverlay.Material3.FloatingActionButton.Primary">
+        <item name="tint">@color/action_button_inner_color</item>
+        <item name="backgroundTint">@color/action_button_fill_color</item>
+    </style>
+    
+    <style name="tabsStyle" parent="Widget.Material3.TabLayout">
+        <item name="tabTextAppearance">@style/tabTextAppearance</item>
+        <item name="tabBackground">@color/tab_bg_color</item>
+        <item name="tabSelectedTextColor">@color/focused_element_color</item>
+        <item name="tabIndicatorColor">@color/focused_element_color</item>
+        <item name="tabIndicatorAnimationMode">linear</item>
+        <item name="tabTextColor">@color/unfocused_element_color</item>
+    </style>
+    
+    <style name="tabTextAppearance" parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="searchBarStyle" parent="Widget.Material3.SearchBar">
+        <item name="backgroundTint">@color/light_bg_color</item>
     </style>
 </resources>

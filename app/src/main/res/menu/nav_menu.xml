@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigationLayers"
-        android:icon="@drawable/layers_icon"
+        android:icon="@drawable/selector_ic_layer"
         android:title="Слои"/>
     <item
         android:id="@+id/navigationMap"
-        android:icon="@drawable/map_icon"
+        android:icon="@drawable/selector_ic_map"
         android:title="Карта"/>
     <item
         android:id="@+id/navigationProfile"
