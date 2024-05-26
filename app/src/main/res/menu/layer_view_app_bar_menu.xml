@@ -2,12 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <!--    todo: дописать менюшку(поделиться слоем, три точки(удалить слой))-->
-
     <item
-        android:id="@+id/save"
-        android:title="@string/text_save"
-        android:icon="@drawable/check_icon"
-        android:iconTint="@color/focused_element_color"
-        android:contentDescription="@string/text_description"
-        app:showAsAction="always"/>
+        android:id="@+id/option_delete"
+        android:title="Удалить"
+        app:showAsAction="never"/>
+
 </menu>

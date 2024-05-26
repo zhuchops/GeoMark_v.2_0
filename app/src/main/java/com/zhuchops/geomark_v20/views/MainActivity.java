@@ -13,7 +13,6 @@ import androidx.navigation.ui.NavigationUI;
 import com.yandex.mapkit.MapKitFactory;
 import com.zhuchops.geomark_v20.R;
 import com.zhuchops.geomark_v20.databinding.ActivityMainBinding;
-import com.zhuchops.geomark_v20.view_models.AppBarViewModel;
 import com.zhuchops.geomark_v20.view_models.BottomNavigationBarViewModel;
 import com.zhuchops.geomark_v20.view_models.MainViewModel;
 
@@ -22,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private NavController navController;
     private MainViewModel mainViewModel;
     private BottomNavigationBarViewModel botNavBarViewModel;
-    private AppBarViewModel appBarViewModel;
     private ConstraintSet constraintSetTop;
     private ConstraintSet constraintSetAppBar;
 
@@ -44,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
                 new ViewModelProvider(this).get(MainViewModel.class);
         botNavBarViewModel =
                 new ViewModelProvider(this).get(BottomNavigationBarViewModel.class);
-        appBarViewModel
-                = new ViewModelProvider(this).get(AppBarViewModel.class);
 
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
 

@@ -24,7 +24,19 @@
 
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/bottom_navigation_view"/>
+            app:layout_constraintBottom_toTopOf="@id/divider"/>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:id="@+id/divider"
+
+            app:dividerColor="@color/divider_color"
+            android:orientation="horizontal"
+
+            app:layout_constraintTop_toBottomOf="@id/nav_host_fragment"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
+            app:layout_constraintLeft_toLeftOf="parent"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation_view"
@@ -36,6 +48,7 @@
             app:menu="@menu/nav_menu"
 
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            app:layout_constraintTop_toBottomOf="@id/divider"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
