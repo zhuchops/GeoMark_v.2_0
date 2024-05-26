@@ -32,8 +32,10 @@
     <color name="focused_element_color">#FF459000</color>
     <color name="unfocused_element_color">#FF616161</color>
     <color name="color_stroke">#FFD9D9D9</color>
-    <color name="nav_bar_bg_color">@color/light_bg_color</color>
+    <color name="nav_bar_bg_color">@color/white</color>
     <color name="upper_menu_bg_color">@color/light_bg_color</color>
     <color name="tab_bg_color">@color/white</color>
+    <color name="bot_nav_element_bg_activated">@color/light_bg_color</color>
+    <color name="bot_nav_element_bg">@color/invisible</color>
 
 </resources>

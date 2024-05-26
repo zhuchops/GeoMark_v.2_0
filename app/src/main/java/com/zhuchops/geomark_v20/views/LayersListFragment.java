@@ -1,13 +1,9 @@
 package com.zhuchops.geomark_v20.views;
 
-import android.content.pm.CapabilityParams;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,7 +14,6 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.divider.MaterialDivider;
 import com.google.android.material.divider.MaterialDividerItemDecoration;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.zhuchops.geomark_v20.R;
@@ -27,26 +22,21 @@ import com.zhuchops.geomark_v20.adapters.RecyclerAdapter;
 import com.zhuchops.geomark_v20.adapters.ViewPagerAdapter;
 import com.zhuchops.geomark_v20.databinding.FragmentLayersListBinding;
 import com.zhuchops.geomark_v20.models.GeoLayer;
-import com.zhuchops.geomark_v20.models.RecyclerLayerItem;
-import com.zhuchops.geomark_v20.models.ViewPagerLayersItem;
-import com.zhuchops.geomark_v20.view_models.AppBarViewModel;
 import com.zhuchops.geomark_v20.view_models.MainViewModel;
 import com.zhuchops.geomark_v20.view_models.LayersListViewModel;
 
-import java.awt.font.NumericShaper;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NavigableMap;
 
 public class LayersListFragment extends Fragment
         implements View.OnClickListener, RecyclerAdapter.OnItemClickListener {
 
     private FragmentLayersListBinding binding;
-    private LayersListViewModel viewModel;
+    private LayersListViewModel layersListViewModel;
     private MainViewModel mainViewModel;
-    private AppBarViewModel appBarViewModel;
     private RecyclerAdapter myLayersAdapter;
     private RecyclerAdapter otherLayersAdapter;
+    private NavController navController;
 
     public LayersListFragment() {
         super(R.layout.fragment_layers_list);
@@ -59,19 +49,15 @@ public class LayersListFragment extends Fragment
         myLayersAdapter = new RecyclerAdapter(this);
         otherLayersAdapter = new RecyclerAdapter(this);
 
-        viewModel = new ViewModelProvider(requireActivity()).get(LayersListViewModel.class);
+        layersListViewModel = new ViewModelProvider(requireActivity()).get(LayersListViewModel.class);
         mainViewModel =
                 new ViewModelProvider(requireActivity()).get(MainViewModel.class);
-        appBarViewModel =
-                new ViewModelProvider(requireActivity()).get(AppBarViewModel.class);
 
-        viewModel.getSelectedLayer().observe(this, layer -> {
-            //todo: отправить смотреть выбранный слой
-
-        });
-        viewModel.getLayers().observe(this, layers -> {
+        layersListViewModel.getLayers().observe(this, layers -> {
             myLayersAdapter.setItems(layers);
         });
+
+        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
     }
 
     @Nullable
@@ -123,20 +109,19 @@ public class LayersListFragment extends Fragment
     @Override
     public void onResume() {
         super.onResume();
-
-        appBarViewModel.setCurrentFragmentType(AppBarViewModel.FragmentType.TEXT);
     }
 
     @Override
     public void onClick(View v) {
-        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
         if (v.equals(binding.addLayerButton)) {
             navController.navigate(R.id.action_add_new_layer);
+            layersListViewModel.setEditingLayer(null);
         }
     }
 
     @Override
     public void onItemClick(GeoLayer layer) {
-
+        navController.navigate(R.id.action_open_view_layer);
+        layersListViewModel.selectLayer(layer);
     }
 }

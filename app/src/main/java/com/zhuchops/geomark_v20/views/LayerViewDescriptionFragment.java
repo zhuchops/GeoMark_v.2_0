@@ -21,7 +21,6 @@ public class LayerViewDescriptionFragment extends Fragment {
 
     private FragmentLayerViewDescriptionBinding binding;
     private LayerViewViewModel layerViewViewModel;
-    private LayersListViewModel layersListViewModel;
 
     public LayerViewDescriptionFragment() {
         super(R.layout.fragment_layer_view_description);
@@ -31,12 +30,8 @@ public class LayerViewDescriptionFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        layerViewViewModel = new ViewModelProvider(requireParentFragment()).get(LayerViewViewModel.class);
-        layersListViewModel = new ViewModelProvider(requireParentFragment()).get(LayersListViewModel.class);
-
-        layersListViewModel.getSelectedLayer().observe(requireParentFragment(), selectedLayer -> {
-            layerViewViewModel.setLayer(selectedLayer);
-        });
+        Fragment parent = requireParentFragment();
+        layerViewViewModel = new ViewModelProvider(parent).get(LayerViewViewModel.class);
     }
 
     @Nullable
@@ -59,7 +54,7 @@ public class LayerViewDescriptionFragment extends Fragment {
     public void updateUI() {
         GeoLayer currentLayer = layerViewViewModel.getLayer().getValue();
         binding.image.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.no_image_sign, getResources().newTheme()));
-        binding.toolBar.setTitle(currentLayer.getName());
+        binding.nameViewOfLayer.setText(currentLayer.getName());
         binding.descriptionOfLayer.setText(currentLayer.getDescription());
     }
 }

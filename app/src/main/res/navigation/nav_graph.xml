@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_add_new_layer"
             app:destination="@+id/layer_change_description_view_fragment"/>
+        <action
+            android:id="@+id/action_open_view_layer"
+            app:destination="@+id/layer_view_fragment"/>
     </fragment>
 
     <fragment
@@ -28,4 +31,17 @@
             app:destination="@+id/layers_list_fragment"
             app:popUpToInclusive="true"/>
     </fragment>
+
+    <fragment
+        android:id="@+id/layer_view_fragment"
+        android:name="com.zhuchops.geomark_v20.views.LayerViewFragment">
+        <action
+            android:id="@+id/action_close_view_layer"
+            app:destination="@+id/layers_list_fragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_edit_layer"
+            app:destination="@id/layer_change_description_view_fragment" />
+    </fragment>
+
 </navigation>

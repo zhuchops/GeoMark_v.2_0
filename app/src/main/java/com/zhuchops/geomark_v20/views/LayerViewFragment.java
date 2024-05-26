@@ -9,20 +9,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.zhuchops.geomark_v20.R;
 import com.zhuchops.geomark_v20.adapters.LayerViewAdapter;
 import com.zhuchops.geomark_v20.databinding.FragmentLayerViewBinding;
 import com.zhuchops.geomark_v20.models.GeoLayer;
-import com.zhuchops.geomark_v20.view_models.AppBarViewModel;
 import com.zhuchops.geomark_v20.view_models.LayerViewViewModel;
+import com.zhuchops.geomark_v20.view_models.LayersListViewModel;
 
-public class LayerViewFragment extends Fragment {
+public class LayerViewFragment extends Fragment implements View.OnClickListener {
     private FragmentLayerViewBinding binding;
-    private LayerViewViewModel viewModel;
-    private AppBarViewModel appBarViewModel;
+    private LayersListViewModel layersListViewModel;
+    private LayerViewViewModel layerViewViewModel;
     private GeoLayer currentLayer;
+    private NavController navController;
 
     public LayerViewFragment() {
         super(R.layout.fragment_layer_view);
@@ -32,13 +35,14 @@ public class LayerViewFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        viewModel = new ViewModelProvider(this).get(LayerViewViewModel.class);
-        appBarViewModel =
-                new ViewModelProvider(requireActivity()).get(AppBarViewModel.class);
+        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
 
-        viewModel.getLayer().observe(this, geoLayer -> {
+        layersListViewModel = new ViewModelProvider(requireActivity()).get(LayersListViewModel.class);
+        layerViewViewModel = new ViewModelProvider(this).get(LayerViewViewModel.class);
+
+        layersListViewModel.getSelectedLayer().observe(this, geoLayer -> {
             this.currentLayer = geoLayer;
-            updateUI();
+            layerViewViewModel.setLayer(geoLayer);
         });
     }
 
@@ -46,6 +50,20 @@ public class LayerViewFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentLayerViewBinding.inflate(inflater, container, false);
+
+        binding.buttonEditLayer.setOnClickListener(this);
+        binding.toolBar.setNavigationOnClickListener(v -> {
+            navController.navigateUp();
+        });
+
+        binding.toolBar.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.option_delete) {
+                layersListViewModel.deleteLayer(layerViewViewModel.getLayer().getValue());
+                navController.navigateUp();
+                return true;
+            }
+            return false;
+        });
 
         return binding.getRoot();
     }
@@ -65,17 +83,20 @@ public class LayerViewFragment extends Fragment {
                     tab.setText(getString(R.string.text_map));
                     break;
             }
-        }));
-    }
-
-    public void updateUI() {
-        //TODO
+        })).attach();
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        appBarViewModel.setCurrentFragmentType(AppBarViewModel.FragmentType.CARD);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.equals(binding.buttonEditLayer)) {
+            navController.navigate(R.id.action_edit_layer);
+            layersListViewModel.setEditingLayer(layerViewViewModel.getLayer().getValue());
+        }
     }
 }

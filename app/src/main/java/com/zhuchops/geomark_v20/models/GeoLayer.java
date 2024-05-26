@@ -5,10 +5,10 @@ import java.util.List;
 
 public class GeoLayer {
     private final String id;
-    private final byte[] imageData;
-    private final ArrayList<GeoMark> layer;
-    private final String name;
-    private final String description;
+    private byte[] imageData;
+    private ArrayList<GeoMark> layer;
+    private String name;
+    private String description;
 
 
     public GeoLayer(String id, byte[] imageData, String name, String description, ArrayList<GeoMark> layer) {
@@ -61,5 +61,21 @@ public class GeoLayer {
 
     public String getId() {
         return this.id;
+    }
+
+    public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
+    }
+
+    public void setLayer(ArrayList<GeoMark> layer) {
+        this.layer = layer;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

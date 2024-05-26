@@ -50,8 +50,8 @@
     </style>
 
     <style name="regularTextFromText">
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/mini_description_color</item>
     </style>
 
     <style name="optionButtonStyle">
@@ -62,7 +62,7 @@
     <style name="botNavBarStyle" parent="Widget.Material3.BottomNavigationView">
         <item name="backgroundTint">@color/nav_bar_bg_color</item>
         <item name="itemIconTint">@color/navigation_icon_color_selector</item>
-        <item name="itemActiveIndicatorStyle">@color/invisible</item>
+        <item name="itemBackground">@color/selector_item_background_color</item>
         <item name="android:textStyle">bold</item>
         <item name="itemTextColor">@color/navigation_label_color_selector</item>
         <item name="itemIconSize">24dp</item>
@@ -105,4 +105,16 @@
     <style name="searchViewStyle" parent="Widget.Material3.SearchView">
         <item name="backgroundTint">@color/white</item>
     </style>
+
+    <style name="toolbarTheme" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorSecondary">@color/black</item>
+        <item name="actionMenuTextColor">@color/black</item>
+    </style>
+
+    <style name="popupMenuTheme" parent="Widget.AppCompat.Light.PopupMenu">
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="popupMenuBackground">@color/white</item>
+    </style>
+        
 </resources>

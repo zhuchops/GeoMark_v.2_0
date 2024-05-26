@@ -1,19 +1,14 @@
 package com.zhuchops.geomark_v20.views;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 
 import com.yandex.mapkit.map.CameraListener;
 import com.yandex.mapkit.map.CameraPosition;
@@ -22,7 +17,6 @@ import com.yandex.mapkit.map.Map;
 import com.yandex.mapkit.mapview.MapView;
 import com.zhuchops.geomark_v20.R;
 import com.zhuchops.geomark_v20.databinding.FragmentHomeMapBinding;
-import com.zhuchops.geomark_v20.view_models.AppBarViewModel;
 import com.zhuchops.geomark_v20.view_models.MainViewModel;
 
 public class HomeMapFragment extends Fragment
@@ -31,7 +25,6 @@ public class HomeMapFragment extends Fragment
     private FragmentHomeMapBinding binding;
     private MapView mapView;
     private MainViewModel mainViewModel;
-    private AppBarViewModel appBarViewModel;
 
     public HomeMapFragment() {
         super(R.layout.fragment_home_map);
@@ -42,8 +35,6 @@ public class HomeMapFragment extends Fragment
         super.onCreate(savedInstanceState);
 
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
-        appBarViewModel
-                = new ViewModelProvider(requireActivity()).get(AppBarViewModel.class);
     }
 
     @Nullable
@@ -75,8 +66,6 @@ public class HomeMapFragment extends Fragment
     @Override
     public void onResume() {
         super.onResume();
-
-        appBarViewModel.setCurrentFragmentType(AppBarViewModel.FragmentType.MAP);
     }
 
     @Override

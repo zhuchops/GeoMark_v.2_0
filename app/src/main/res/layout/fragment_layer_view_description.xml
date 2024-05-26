@@ -1,94 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingHorizontal="20dp"
+    android:backgroundTint="@color/white"
+
+    app:layout_constraintTop_toBottomOf="@id/app_bar_layout"
+    app:layout_constraintLeft_toLeftOf="parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="190dp"
+            android:layout_height="190dp"
+
+            android:scaleType="fitCenter"
+
+            android:layout_marginTop="50dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/nameViewOfLayer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/app_bar_layout"
 
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent">
+            android:gravity="start"
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tool_bar"
+            android:text="Noname"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/black"
 
-                app:menu="@menu/layer_view_app_bar_menu"
-                app:navigationIcon="@drawable/ic_arrow_back"
-                app:title="@string/text_no_title">
+            android:layout_marginTop="22dp"
 
-            </com.google.android.material.appbar.MaterialToolbar>
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image" />
 
-        </com.google.android.material.appbar.AppBarLayout>
+        <TextView
+            android:id="@+id/descriptionOfLayer"
+            style="@style/regularTextFromText"
 
-        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@color/white"
-            android:paddingHorizontal="20dp"
+            android:layout_height="wrap_content"
 
-            app:layout_constraintTop_toBottomOf="@id/app_bar_layout"
-            app:layout_constraintLeft_toLeftOf="parent">
+            android:layout_marginTop="20dp"
+            android:gravity="start"
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/image"
-                    android:layout_width="190dp"
-                    android:layout_height="190dp"
-
-                    android:scaleType="fitCenter"
-
-                    android:layout_marginTop="50dp"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <TextView
-                    android:id="@+id/descriptionTitleView"
-                    style="@style/titleFromLayerView"
-                    android:layout_width="wrap_content"
-
-                    android:layout_height="wrap_content"
-
-                    android:layout_marginTop="50dp"
-
-                    android:text="Описание"
-
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/image" />
-
-                <EditText
-                    android:id="@+id/descriptionOfLayer"
-                    style="@style/regularTextFromText"
-
-                    android:elevation="-10dp"
-
-                    android:enabled="false"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:layout_marginTop="20dp"
-                    android:textAlignment="center"
-
-                    android:paddingHorizontal="10dp"
-
-                    android:text="something here something here something here something here something
+            android:text="something here something here something here something here something
 here something here something here something here something here something here something here
 something here something here something here something here something here something here something
 here something here something here something here something here something here something here
@@ -96,14 +66,10 @@ something here something here something here something here something here somet
 something here something here something here something here something here something here something
 here something here something here something here something here something here something here"
 
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/descriptionTitleView" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </ScrollView>
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nameViewOfLayer" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</ScrollView>

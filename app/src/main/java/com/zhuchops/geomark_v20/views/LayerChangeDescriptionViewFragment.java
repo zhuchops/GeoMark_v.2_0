@@ -4,34 +4,30 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.zhuchops.geomark_v20.R;
 import com.zhuchops.geomark_v20.databinding.FragmentLayerChangeDescriptionViewBinding;
 import com.zhuchops.geomark_v20.models.GeoLayer;
-import com.zhuchops.geomark_v20.models.GeoMark;
 import com.zhuchops.geomark_v20.view_models.BottomNavigationBarViewModel;
 import com.zhuchops.geomark_v20.view_models.LayersListViewModel;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class LayerChangeDescriptionViewFragment extends Fragment
         implements View.OnClickListener {
 
     private FragmentLayerChangeDescriptionViewBinding binding;
     private BottomNavigationBarViewModel botNavViewModel;
+    private LayersListViewModel layersListViewModel;
+    private GeoLayer currentLayer;
 
     public LayerChangeDescriptionViewFragment() {
         super(R.layout.fragment_layer_change_description_view);
@@ -43,6 +39,15 @@ public class LayerChangeDescriptionViewFragment extends Fragment
 
         botNavViewModel =
                 new ViewModelProvider(requireActivity()).get(BottomNavigationBarViewModel.class);
+
+        layersListViewModel = new ViewModelProvider(requireActivity()).get(LayersListViewModel.class);
+
+        layersListViewModel.getEditingLayer().observe(this, layer -> {
+            this.currentLayer = layer;
+            if (layer != null) {
+                updateUI();
+            }
+        });
     }
 
     @Nullable
@@ -57,7 +62,7 @@ public class LayerChangeDescriptionViewFragment extends Fragment
         binding.toolBar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.save) {
                 save();
-                navController.navigate(R.id.action_close_new_layer);
+                navController.navigateUp();
                 return true;
             }
             return false;
@@ -73,15 +78,18 @@ public class LayerChangeDescriptionViewFragment extends Fragment
     private void save() {
         if (binding.changeNameField.getEditText() != null) {
             String name = binding.changeNameField.getEditText().getText().toString();
-            if (name.length() < 5) {
+            if (name.length() < 5 || name.length() > 20) {
                 Snackbar.make(binding.getRoot(), R.string.set_name_attention, Snackbar.LENGTH_SHORT)
                         .show();
             } else {
-                new ViewModelProvider(requireActivity()).get(LayersListViewModel.class).addNewLayer(
-                        name,
-                        Objects.requireNonNull(binding.changeDescriptionField.getEditText()).getText().toString(),
-                        new ArrayList<GeoMark>()
-                );
+                String description = binding.changeDescriptionField.getEditText().getText().toString();
+                if (currentLayer == null)
+                    layersListViewModel.addNewLayer(name, description, new ArrayList<>());
+                else {
+                    currentLayer.setName(name);
+                    currentLayer.setDescription(description);
+                    layersListViewModel.updateLayer(currentLayer);
+                }
             }
         }
     }
@@ -98,6 +106,11 @@ public class LayerChangeDescriptionViewFragment extends Fragment
         super.onPause();
 
         botNavViewModel.setVisibility(true);
+    }
+
+    public void updateUI() {
+        binding.changeNameField.getEditText().setText(currentLayer.getName());
+        binding.changeDescriptionField.getEditText().setText(currentLayer.getDescription());
     }
 
     @Override

@@ -37,6 +37,6 @@
     <string name="text_save">сохранить</string>
     <string name="text_building_layer">Создание слоя</string>
     <string name="text_no_title">No title</string>
-    <string name="set_name_attention">Имя должно содержать более 5ти символов</string>
+    <string name="set_name_attention">Имя должно содержать не менее 5 и не более 20 символов</string>
     <string name="text_add_mark">Добавить метку</string>
 </resources>
