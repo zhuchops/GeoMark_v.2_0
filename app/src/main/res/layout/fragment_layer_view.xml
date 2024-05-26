@@ -18,14 +18,10 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent">
 
-            <com.google.android.material.search.SearchBar
-                android:id="@+id/search_bar"
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tool_bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/text_search"
-
-                style="@style/searchBarStyle"
-                />
+                android:layout_height="wrap_content"/>
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -73,13 +69,5 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.google.android.material.search.SearchView
-        android:id="@+id/search_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/text_search"
-        app:layout_anchor="@id/search_bar"
-        app:layout_scrollFlags="noScroll" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

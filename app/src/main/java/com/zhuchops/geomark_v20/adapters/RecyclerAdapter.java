@@ -27,10 +27,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         void onItemClick(GeoLayer layer);
     }
 
-    public RecyclerAdapter(Context context, OnItemClickListener listener) {
-        inflater = LayoutInflater.from(context);
+    public RecyclerAdapter(OnItemClickListener listener) {
         this.listener = listener;
-
     }
 
     public void setItems(List<GeoLayer> items) {
@@ -41,7 +39,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     @NonNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.layer_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layer_item, parent, false);
         return new RecyclerViewHolder(view);
     }
 

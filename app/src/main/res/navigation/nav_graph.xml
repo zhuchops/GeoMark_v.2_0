@@ -2,19 +2,30 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/navigationMap">
+    app:startDestination="@id/home_map_fragment">
 
     <fragment
-        android:id="@+id/navigationMap"
+        android:id="@+id/home_map_fragment"
         android:name="com.zhuchops.geomark_v20.views.HomeMapFragment"
         android:label="Map">
-        <action
-            android:id="@+id/action_navigationMap_to_navigationLayers"
-            app:destination="@+id/navigationLayers"/>
     </fragment>
 
     <fragment
-        android:id="@+id/navigationLayers"
+        android:id="@+id/layers_list_fragment"
         android:name="com.zhuchops.geomark_v20.views.LayersListFragment"
-        android:label="Layers"/>
+        android:label="Layers">
+        <action
+            android:id="@+id/action_add_new_layer"
+            app:destination="@+id/layer_change_description_view_fragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/layer_change_description_view_fragment"
+        android:name="com.zhuchops.geomark_v20.views.LayerChangeDescriptionViewFragment"
+        android:label="Layer change description">
+        <action
+            android:id="@+id/action_close_new_layer"
+            app:destination="@+id/layers_list_fragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>

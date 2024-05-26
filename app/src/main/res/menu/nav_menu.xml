@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/navigationLayers"
+        android:id="@+id/layers_list_fragment"
         android:icon="@drawable/selector_ic_layer"
         android:title="Слои"/>
     <item
-        android:id="@+id/navigationMap"
+        android:id="@+id/home_map_fragment"
         android:icon="@drawable/selector_ic_map"
         android:title="Карта"/>
     <item

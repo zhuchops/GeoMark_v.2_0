@@ -15,12 +15,13 @@ import com.zhuchops.geomark_v20.R;
 import com.zhuchops.geomark_v20.databinding.FragmentLayerViewDescriptionBinding;
 import com.zhuchops.geomark_v20.models.GeoLayer;
 import com.zhuchops.geomark_v20.view_models.LayerViewViewModel;
+import com.zhuchops.geomark_v20.view_models.LayersListViewModel;
 
 public class LayerViewDescriptionFragment extends Fragment {
 
     private FragmentLayerViewDescriptionBinding binding;
-    private LayerViewViewModel viewModel;
-    private GeoLayer currentLayer;
+    private LayerViewViewModel layerViewViewModel;
+    private LayersListViewModel layersListViewModel;
 
     public LayerViewDescriptionFragment() {
         super(R.layout.fragment_layer_view_description);
@@ -30,7 +31,12 @@ public class LayerViewDescriptionFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        viewModel = new ViewModelProvider(requireParentFragment()).get(LayerViewViewModel.class);
+        layerViewViewModel = new ViewModelProvider(requireParentFragment()).get(LayerViewViewModel.class);
+        layersListViewModel = new ViewModelProvider(requireParentFragment()).get(LayersListViewModel.class);
+
+        layersListViewModel.getSelectedLayer().observe(requireParentFragment(), selectedLayer -> {
+            layerViewViewModel.setLayer(selectedLayer);
+        });
     }
 
     @Nullable
@@ -38,8 +44,7 @@ public class LayerViewDescriptionFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentLayerViewDescriptionBinding.inflate(inflater, container, false);
 
-        viewModel.getLayer().observe(getViewLifecycleOwner(), fragment -> {
-            this.currentLayer = fragment;
+        layerViewViewModel.getLayer().observe(getViewLifecycleOwner(), fragment -> {
             updateUI();
         });
 
@@ -52,7 +57,9 @@ public class LayerViewDescriptionFragment extends Fragment {
     }
 
     public void updateUI() {
+        GeoLayer currentLayer = layerViewViewModel.getLayer().getValue();
         binding.image.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.no_image_sign, getResources().newTheme()));
+        binding.toolBar.setTitle(currentLayer.getName());
         binding.descriptionOfLayer.setText(currentLayer.getDescription());
     }
 }

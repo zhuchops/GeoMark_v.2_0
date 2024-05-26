@@ -1,6 +1,5 @@
 package com.zhuchops.geomark_v20.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,41 +8,38 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.zhuchops.geomark_v20.R;
-import com.zhuchops.geomark_v20.models.ViewPagerLayersItem;
-import com.zhuchops.geomark_v20.view_models.LayersListViewModel;
 
 import java.util.List;
 
 public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.RecyclerViewHolder> {
 
-    private List<ViewPagerLayersItem> items;
-    private LayoutInflater inflater;
-    private LayersListViewModel viewModel;
+    private final List<RecyclerAdapter> innerAdapters;
+    private final List<RecyclerView.ItemDecoration> itemDecorations;
 
-    public ViewPagerAdapter(Context context, List<ViewPagerLayersItem> items, LayersListViewModel viewModel) {
-        this.items = items;
-        this.inflater = LayoutInflater.from(context);
-        this.viewModel = viewModel;
+    public ViewPagerAdapter(List<RecyclerAdapter> innerAdapters, List<RecyclerView.ItemDecoration> itemDecorations) {
+        this.innerAdapters = innerAdapters;
+        this.itemDecorations = itemDecorations;
     }
 
     @NonNull
     @Override
     public ViewPagerAdapter.RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.layers_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layers_item, parent, false);
         return new RecyclerViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        ViewPagerLayersItem item = items.get(position);
-        holder.recyclerView.setAdapter(
-                new RecyclerAdapter(inflater.getContext(), layer -> viewModel.onItemClicked(layer))
-        );
+        holder.recyclerView.setAdapter(innerAdapters.get(position));
+        for (RecyclerView.ItemDecoration itemDecoration:
+             itemDecorations) {
+            holder.recyclerView.addItemDecoration(itemDecoration);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return 2;
     }
 
     static class RecyclerViewHolder extends RecyclerView.ViewHolder {

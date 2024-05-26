@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         NavHostFragment navHostFragment =
                 (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-        NavController navController = navHostFragment.getNavController();
+        navController = navHostFragment.getNavController();
 
         mainViewModel =
                 new ViewModelProvider(this).get(MainViewModel.class);
@@ -49,50 +49,13 @@ public class MainActivity extends AppCompatActivity {
 
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
 
-        constraintSetTop = new ConstraintSet();
-        constraintSetAppBar = new ConstraintSet();
-
-        constraintSetTop.clone(binding.constraintLayout);
-        constraintSetTop.connect(R.id.nav_host_fragment, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
-        constraintSetTop.connect(R.id.nav_host_fragment, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 0);
-        constraintSetTop.connect(R.id.nav_host_fragment, ConstraintSet.BOTTOM, R.id.bottom_navigation_view, ConstraintSet.TOP, 0);
-
-        constraintSetAppBar.clone(binding.constraintLayout);
-        constraintSetAppBar.connect(R.id.nav_host_fragment, ConstraintSet.TOP, R.id.app_bar_layout, ConstraintSet.BOTTOM, 0);
-        constraintSetTop.connect(R.id.nav_host_fragment, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 0);
-        constraintSetAppBar.connect(R.id.nav_host_fragment, ConstraintSet.BOTTOM, R.id.bottom_navigation_view, ConstraintSet.TOP, 0);
-
-//        botNavBarViewModel.getIsVisible().observe(this, isVisible -> {
-//            if (isVisible) binding.bottomNavigationView.setVisibility(View.VISIBLE);
-//            else binding.bottomNavigationView.setVisibility(View.GONE);
-//        });
-
-        appBarViewModel.getCurrentFragmentType().observe(this, type -> {
-            if (type.equals(AppBarViewModel.FragmentType.MAP)) {
-                binding.appBarLayout.setBackgroundColor(getColor(R.color.invisible));
-                binding.searchBar.setVisibility(View.VISIBLE);
-                binding.toolBar.setVisibility(View.GONE);
-                applyTopConstraints();
-            } else if (type.equals(AppBarViewModel.FragmentType.TEXT)){
-                binding.appBarLayout.setBackgroundColor(getColor(R.color.white));
-                binding.searchBar.setVisibility(View.VISIBLE);
-                binding.toolBar.setVisibility(View.GONE);
-                applyAppBarConstraints();
-            } else if (type.equals(AppBarViewModel.FragmentType.CARD)) {
-                binding.appBarLayout.setBackgroundColor(getColor(R.color.white));
-                binding.searchBar.setVisibility(View.GONE);
-                binding.toolBar.setVisibility(View.VISIBLE);
-                applyAppBarConstraints();
+        botNavBarViewModel.getIsVisible().observe(this, isVisible -> {
+            if (isVisible) {
+                binding.bottomNavigationView.setVisibility(View.VISIBLE);
+            } else {
+                binding.bottomNavigationView.setVisibility(View.GONE);
             }
         });
-    }
-
-    private void applyTopConstraints() {
-        constraintSetTop.applyTo(binding.constraintLayout);
-    }
-
-    private void applyAppBarConstraints() {
-        constraintSetAppBar.applyTo(binding.constraintLayout);
     }
 
     @Override
