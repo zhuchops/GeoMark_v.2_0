@@ -34,7 +34,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/nameViewOfLayer"
+            android:id="@+id/nameView"
             style="@style/NameOfListTextStyle"
             android:layout_width="wrap_content"
 

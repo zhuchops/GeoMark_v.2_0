@@ -1,11 +1,8 @@
 package com.zhuchops.geomark_v20.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -65,7 +62,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageViewOfLayer);
-            nameView = itemView.findViewById(R.id.nameViewOfLayer);
+            nameView = itemView.findViewById(R.id.nameView);
             descriptionView = itemView.findViewById(R.id.descriptionViewOfLayer);
         }
     }

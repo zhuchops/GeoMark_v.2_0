@@ -39,4 +39,8 @@
     <string name="text_no_title">No title</string>
     <string name="set_name_attention">Имя должно содержать не менее 5 и не более 20 символов</string>
     <string name="text_add_mark">Добавить метку</string>
+    <string name="text_name">Название</string>
+    <string name="text_latitude">Широта</string>
+    <string name="text_longitude">Долгота</string>
+    <string name="text_trail">Маршрут</string>
 </resources>
