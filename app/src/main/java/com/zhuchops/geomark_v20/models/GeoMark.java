@@ -2,14 +2,14 @@ package com.zhuchops.geomark_v20.models;
 
 public class GeoMark {
     private String id;
-    private String title;
+    private String name;
     private double latitude;
     private double longitude;
 
     // Конструкторы, геттеры и сеттеры
-    public GeoMark(String id, String title, double latitude, double longitude) {
+    public GeoMark(String id, String name, String description, double latitude, double longitude) {
         this.id = id;
-        this.title = title;
+        this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -22,12 +22,12 @@ public class GeoMark {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public double getLatitude() {

@@ -20,7 +20,7 @@ import com.zhuchops.geomark_v20.view_models.LayersListViewModel;
 public class LayerViewDescriptionFragment extends Fragment {
 
     private FragmentLayerViewDescriptionBinding binding;
-    private LayerViewViewModel layerViewViewModel;
+    private LayersListViewModel layersListViewModel;
 
     public LayerViewDescriptionFragment() {
         super(R.layout.fragment_layer_view_description);
@@ -31,7 +31,7 @@ public class LayerViewDescriptionFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         Fragment parent = requireParentFragment();
-        layerViewViewModel = new ViewModelProvider(parent).get(LayerViewViewModel.class);
+        layersListViewModel = new ViewModelProvider(requireActivity()).get(LayersListViewModel.class);
     }
 
     @Nullable
@@ -39,7 +39,7 @@ public class LayerViewDescriptionFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentLayerViewDescriptionBinding.inflate(inflater, container, false);
 
-        layerViewViewModel.getLayer().observe(getViewLifecycleOwner(), fragment -> {
+        layersListViewModel.getSelectedLayer().observe(getViewLifecycleOwner(), fragment -> {
             updateUI();
         });
 
@@ -52,9 +52,9 @@ public class LayerViewDescriptionFragment extends Fragment {
     }
 
     public void updateUI() {
-        GeoLayer currentLayer = layerViewViewModel.getLayer().getValue();
+        GeoLayer currentLayer = layersListViewModel.getSelectedLayer().getValue();
         binding.image.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.no_image_sign, getResources().newTheme()));
-        binding.nameViewOfLayer.setText(currentLayer.getName());
+        binding.nameView.setText(currentLayer.getName());
         binding.descriptionOfLayer.setText(currentLayer.getDescription());
     }
 }

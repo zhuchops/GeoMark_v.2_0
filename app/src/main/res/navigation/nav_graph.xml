@@ -30,6 +30,9 @@
             android:id="@+id/action_close_new_layer"
             app:destination="@+id/layers_list_fragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_add_mark"
+            app:destination="@+id/mark_change_fragment"/>
     </fragment>
 
     <fragment
@@ -42,6 +45,22 @@
         <action
             android:id="@+id/action_edit_layer"
             app:destination="@id/layer_change_description_view_fragment" />
+        <action
+            android:id="@+id/action_view_mark"
+            app:destination="@id/mark_view_fragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/mark_change_fragment"
+        android:name="com.zhuchops.geomark_v20.views.MarkChangeFragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/mark_view_fragment"
+        android:name="com.zhuchops.geomark_v20.views.MarkViewFragment">
+        <action
+            android:id="@+id/action_change_mark"
+            app:destination="@id/mark_change_fragment"/>
     </fragment>
 
 </navigation>

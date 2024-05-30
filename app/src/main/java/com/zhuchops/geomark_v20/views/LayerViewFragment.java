@@ -38,11 +38,10 @@ public class LayerViewFragment extends Fragment implements View.OnClickListener 
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
 
         layersListViewModel = new ViewModelProvider(requireActivity()).get(LayersListViewModel.class);
-        layerViewViewModel = new ViewModelProvider(this).get(LayerViewViewModel.class);
+        layerViewViewModel = new ViewModelProvider(requireActivity()).get(LayerViewViewModel.class);
 
-        layersListViewModel.getSelectedLayer().observe(this, geoLayer -> {
-            this.currentLayer = geoLayer;
-            layerViewViewModel.setLayer(geoLayer);
+        layersListViewModel.getSelectedLayer().observe(this, layer -> {
+            layerViewViewModel.setLayer(layersListViewModel.getSelectedLayer().getValue());
         });
     }
 
@@ -58,7 +57,7 @@ public class LayerViewFragment extends Fragment implements View.OnClickListener 
 
         binding.toolBar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.option_delete) {
-                layersListViewModel.deleteLayer(layerViewViewModel.getLayer().getValue());
+                layersListViewModel.deleteLayer(layersListViewModel.getSelectedLayer().getValue());
                 navController.navigateUp();
                 return true;
             }
@@ -96,7 +95,7 @@ public class LayerViewFragment extends Fragment implements View.OnClickListener 
     public void onClick(View v) {
         if (v.equals(binding.buttonEditLayer)) {
             navController.navigate(R.id.action_edit_layer);
-            layersListViewModel.setEditingLayer(layerViewViewModel.getLayer().getValue());
+            layersListViewModel.setEditingLayer(layersListViewModel.getSelectedLayer().getValue());
         }
     }
 }

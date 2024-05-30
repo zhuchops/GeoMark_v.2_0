@@ -17,6 +17,7 @@ import com.zhuchops.geomark_v20.R;
 import com.zhuchops.geomark_v20.databinding.FragmentLayerChangeDescriptionViewBinding;
 import com.zhuchops.geomark_v20.models.GeoLayer;
 import com.zhuchops.geomark_v20.view_models.BottomNavigationBarViewModel;
+import com.zhuchops.geomark_v20.view_models.LayerViewViewModel;
 import com.zhuchops.geomark_v20.view_models.LayersListViewModel;
 
 import java.util.ArrayList;
@@ -27,7 +28,9 @@ public class LayerChangeDescriptionViewFragment extends Fragment
     private FragmentLayerChangeDescriptionViewBinding binding;
     private BottomNavigationBarViewModel botNavViewModel;
     private LayersListViewModel layersListViewModel;
+    private LayerViewViewModel layerViewViewModel;
     private GeoLayer currentLayer;
+    private NavController navController;
 
     public LayerChangeDescriptionViewFragment() {
         super(R.layout.fragment_layer_change_description_view);
@@ -41,11 +44,17 @@ public class LayerChangeDescriptionViewFragment extends Fragment
                 new ViewModelProvider(requireActivity()).get(BottomNavigationBarViewModel.class);
 
         layersListViewModel = new ViewModelProvider(requireActivity()).get(LayersListViewModel.class);
+        layerViewViewModel = new ViewModelProvider(requireActivity()).get(LayerViewViewModel.class);
 
-        layersListViewModel.getEditingLayer().observe(this, layer -> {
-            this.currentLayer = layer;
-            if (layer != null) {
-                updateUI();
+        layersListViewModel.getIsAddLayer().observe(this, isAddLayer -> {
+            if (isAddLayer) {
+
+            }
+        });
+
+        layerViewViewModel.getEditing().observe(this, isEditing -> {
+            if (isEditing) {
+                currentLayer = layerViewViewModel.getLayer().getValue();
             }
         });
     }
@@ -55,7 +64,7 @@ public class LayerChangeDescriptionViewFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentLayerChangeDescriptionViewBinding.inflate(inflater, container, false);
 
-        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
 
         binding.addMarkButton.setOnClickListener(this);
 
@@ -84,11 +93,10 @@ public class LayerChangeDescriptionViewFragment extends Fragment
             } else {
                 String description = binding.changeDescriptionField.getEditText().getText().toString();
                 if (currentLayer == null)
-                    layersListViewModel.addNewLayer(name, description, new ArrayList<>());
+                    layersListViewModel.addLayer(name, description, new ArrayList<>());
                 else {
-                    currentLayer.setName(name);
-                    currentLayer.setDescription(description);
-                    layersListViewModel.updateLayer(currentLayer);
+                    layersListViewModel.
+                            updateCurrentLayer(currentLayer, name, description, new ArrayList<>());
                 }
             }
         }
@@ -115,6 +123,8 @@ public class LayerChangeDescriptionViewFragment extends Fragment
 
     @Override
     public void onClick(View v) {
-
+        if (v.equals(binding.addMarkButton)) {
+            navController.navigate(R.id.action_add_mark);
+        }
     }
 }

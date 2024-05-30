@@ -6,20 +6,20 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.yandex.mapkit.geometry.Geo;
 import com.zhuchops.geomark_v20.models.FileManager;
 import com.zhuchops.geomark_v20.models.GeoLayer;
 import com.zhuchops.geomark_v20.models.GeoMark;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class LayersListViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<GeoLayer>> layers;
     private MutableLiveData<GeoLayer> selectedLayer = new MutableLiveData<>();
-    private MutableLiveData<GeoLayer> editingLayer = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isAddLayer = new MutableLiveData<>();
     private FileManager fileManager;
 
     public LayersListViewModel(@NonNull Application application) {
@@ -52,7 +52,7 @@ public class LayersListViewModel extends AndroidViewModel {
         this.layers.setValue(layers);
     }
 
-    public void addNewLayer(String name, String description, ArrayList<GeoMark> geoMarks) {
+    public void addLayer(String name, String description, ArrayList<GeoMark> geoMarks) {
         String id = UUID.randomUUID().toString();
         GeoLayer layer = new GeoLayer(
                 id, new byte[111],
@@ -63,23 +63,44 @@ public class LayersListViewModel extends AndroidViewModel {
         setLayers(layers);
     }
 
-    public void updateLayer(GeoLayer layer) {
-        List<GeoLayer> layers = getLayers().getValue();
-        layers.set(layers.indexOf(layer), layer);
-        setLayers(layers);
+    public void updateCurrentLayer(GeoLayer layer, String name,
+                                   String description, ArrayList<GeoMark> marks) {
+        layer.setName(name);
+        layer.setDescription(description);
+        layer.setMarks(marks);
+        layers.setValue(layers.getValue());
     }
 
-    public void setEditingLayer(GeoLayer layer) {
-        this.editingLayer.setValue(layer);
+    public void setAddLayer(Boolean mode) {
+        isAddLayer.setValue(mode);
     }
 
-    public MutableLiveData<GeoLayer> getEditingLayer() {
-        return editingLayer;
+    public MutableLiveData<Boolean> getIsAddLayer() {
+        return isAddLayer;
     }
 
     public void deleteLayer(GeoLayer value) {
         List<GeoLayer> layers = getLayers().getValue();
         layers.remove(layers.indexOf(value));
         setLayers(layers);
+    }
+
+    public void addMarkToLayer(
+            String name, String attitude,
+            String longitude, String description) {
+
+        String id = UUID.randomUUID().toString();
+        GeoMark mark = new GeoMark(
+            id, name, description,
+                Double.parseDouble(attitude), Double.parseDouble(longitude)
+        );
+        Objects.requireNonNull(selectedLayer.getValue()).addMark(mark);
+        setLayers(layers.getValue());
+    }
+
+    public void removeMarkFromLayer(GeoMark mark) {
+        Objects.requireNonNull(selectedLayer.getValue()).removeMark(mark);
+
+        setLayers(layers.getValue());
     }
 }

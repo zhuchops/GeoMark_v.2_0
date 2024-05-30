@@ -1,7 +1,6 @@
 package com.zhuchops.geomark_v20.models;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class GeoLayer {
     private final String id;
@@ -33,6 +32,9 @@ public class GeoLayer {
 
     public void removeMark(int index) {
         this.layer.remove(index);
+    }
+    public void removeMark(GeoMark mark) {
+        this.layer.remove(mark);
     }
 
     public int getSize() {
@@ -67,7 +69,7 @@ public class GeoLayer {
         this.imageData = imageData;
     }
 
-    public void setLayer(ArrayList<GeoMark> layer) {
+    public void setMarks(ArrayList<GeoMark> layer) {
         this.layer = layer;
     }
 

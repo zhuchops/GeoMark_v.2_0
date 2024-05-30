@@ -43,4 +43,10 @@
     <string name="text_latitude">Широта</string>
     <string name="text_longitude">Долгота</string>
     <string name="text_trail">Маршрут</string>
+    <string name="text_longitude_cannot_be_empty">Долгота не может быть пустой</string>
+    <string name="text_longitude_have_to_be_between">Долгота должна быть между -180 и 180</string>
+    <string name="text_latitude_cannot_be_empty">Широта не может быть пустой</string>
+    <string name="text_latitude_have_to_be_between">Широта должна быть между -90 и 90</string>
+    <string name="text_invalid_format">Неправильный формат</string>
+    <string name="text_correct_input">Исправте входные данные перед сохранением</string>
 </resources>
