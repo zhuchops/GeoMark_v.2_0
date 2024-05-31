@@ -18,13 +18,17 @@ import androidx.navigation.Navigation;
 import com.google.android.material.snackbar.Snackbar;
 import com.zhuchops.geomark_v20.R;
 import com.zhuchops.geomark_v20.databinding.FragmentChangeMarkBinding;
+import com.zhuchops.geomark_v20.models.GeoLayer;
+import com.zhuchops.geomark_v20.models.GeoMark;
 import com.zhuchops.geomark_v20.view_models.BottomNavigationBarViewModel;
+import com.zhuchops.geomark_v20.view_models.LayerViewViewModel;
 import com.zhuchops.geomark_v20.view_models.LayersListViewModel;
 
 public class MarkChangeFragment extends Fragment {
 
     private BottomNavigationBarViewModel botNavViewModel;
     private LayersListViewModel layersListViewModel;
+    private LayerViewViewModel layerViewViewModel;
     private FragmentChangeMarkBinding binding;
     private NavController navController;
 
@@ -36,10 +40,15 @@ public class MarkChangeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        layerViewViewModel =
+                new ViewModelProvider(requireActivity()).get(LayerViewViewModel.class);
 
         botNavViewModel =
                 new ViewModelProvider(requireActivity()).get(BottomNavigationBarViewModel.class);
+
+        layerViewViewModel.getEditingMark().observe(this, geoMark -> {
+            updateUI();
+        });
     }
 
     @Nullable
@@ -51,8 +60,7 @@ public class MarkChangeFragment extends Fragment {
 
         binding.toolBar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.save) {
-                save();
-                navController.navigateUp();
+                if (save()) navController.navigateUp();
                 return true;
             }
             return false;
@@ -61,6 +69,9 @@ public class MarkChangeFragment extends Fragment {
         binding.toolBar.setNavigationOnClickListener(view -> {
             navController.navigateUp();
         });
+
+        binding.changeLatitudeField.getEditText().addTextChangedListener(new LatitudeValidator());
+        binding.changeLongitudeField.getEditText().addTextChangedListener(new LongitudeValidator());
 
         return binding.getRoot();
     }
@@ -80,15 +91,31 @@ public class MarkChangeFragment extends Fragment {
     }
 
     public void updateUI() {
-
+        if (layerViewViewModel.getEditingMark().getValue() != null) {
+            GeoMark mark = layerViewViewModel.getEditingMark().getValue();
+            binding.changeNameField.getEditText().setText(mark.getName());
+            binding.changeLatitudeField.getEditText().setText(String.valueOf(mark.getLatitude()));
+            binding.changeLongitudeField.getEditText().setText(String.valueOf(mark.getLongitude()));
+            binding.changeDescriptionField.getEditText().setText(mark.getDescription());
+        }
     }
 
-    private void save() {
-        if (binding.changeLatitudeField.getError() == null && binding.changeLongitudeField.getError() == null) {
-            layersListViewModel.addMarkToLayer();
+    private boolean save() {
+        if (binding.changeLatitudeField.getError() == null && binding.changeLongitudeField.getError() == null &&
+                !binding.changeNameField.getEditText().getText().toString().isEmpty() &&
+                !binding.changeLatitudeField.getEditText().getText().toString().isEmpty() &&
+                !binding.changeLongitudeField.getEditText().getText().toString().isEmpty()) {
+            layerViewViewModel.addMark(
+                    binding.changeNameField.getEditText().getText().toString(),
+                    binding.changeLatitudeField.getEditText().getText().toString(),
+                    binding.changeLongitudeField.getEditText().getText().toString(),
+                    binding.changeDescriptionField.getEditText().getText().toString()
+            );
+            return true;
         } else {
             Snackbar.make(binding.getRoot(), R.string.text_correct_input, Toast.LENGTH_SHORT)
                     .show();
+            return false;
         }
     }
 

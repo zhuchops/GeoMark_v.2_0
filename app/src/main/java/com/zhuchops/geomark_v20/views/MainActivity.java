@@ -11,9 +11,11 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.yandex.mapkit.MapKitFactory;
+import com.yandex.mapkit.layers.Layer;
 import com.zhuchops.geomark_v20.R;
 import com.zhuchops.geomark_v20.databinding.ActivityMainBinding;
 import com.zhuchops.geomark_v20.view_models.BottomNavigationBarViewModel;
+import com.zhuchops.geomark_v20.view_models.LayersListViewModel;
 import com.zhuchops.geomark_v20.view_models.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private NavController navController;
     private MainViewModel mainViewModel;
     private BottomNavigationBarViewModel botNavBarViewModel;
+    private LayersListViewModel layersListViewModel;
     private ConstraintSet constraintSetTop;
     private ConstraintSet constraintSetAppBar;
 
@@ -38,10 +41,14 @@ public class MainActivity extends AppCompatActivity {
                 (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();
 
+
+
         mainViewModel =
                 new ViewModelProvider(this).get(MainViewModel.class);
         botNavBarViewModel =
                 new ViewModelProvider(this).get(BottomNavigationBarViewModel.class);
+        layersListViewModel =
+                new ViewModelProvider(this).get(LayersListViewModel.class);
 
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
 
@@ -68,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         MapKitFactory.getInstance().onStop();
+        layersListViewModel.saveLayers();
 
         super.onStop();
     }

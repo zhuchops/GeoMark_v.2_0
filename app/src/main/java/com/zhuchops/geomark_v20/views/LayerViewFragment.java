@@ -94,8 +94,8 @@ public class LayerViewFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         if (v.equals(binding.buttonEditLayer)) {
+            layerViewViewModel.setEditing(true);
             navController.navigate(R.id.action_edit_layer);
-            layersListViewModel.setEditingLayer(layersListViewModel.getSelectedLayer().getValue());
         }
     }
 }

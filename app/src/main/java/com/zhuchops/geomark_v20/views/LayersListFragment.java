@@ -115,13 +115,14 @@ public class LayersListFragment extends Fragment
     public void onClick(View v) {
         if (v.equals(binding.addLayerButton)) {
             navController.navigate(R.id.action_add_new_layer);
-            layersListViewModel.setEditingLayer(null);
+            layersListViewModel.setAddLayer(true);
         }
     }
 
     @Override
     public void onItemClick(GeoLayer layer) {
-        navController.navigate(R.id.action_open_view_layer);
         layersListViewModel.selectLayer(layer);
+
+        navController.navigate(R.id.action_open_view_layer);
     }
 }

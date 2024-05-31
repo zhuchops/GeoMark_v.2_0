@@ -1,6 +1,7 @@
 package com.zhuchops.geomark_v20.models;
 
 public class GeoMark {
+    private String description;
     private String id;
     private String name;
     private double latitude;
@@ -12,6 +13,7 @@ public class GeoMark {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.description = description;
     }
 
     public String getId() {
@@ -44,6 +46,14 @@ public class GeoMark {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
 

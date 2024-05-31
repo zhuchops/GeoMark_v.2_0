@@ -49,4 +49,6 @@
     <string name="text_latitude_have_to_be_between">Широта должна быть между -90 и 90</string>
     <string name="text_invalid_format">Неправильный формат</string>
     <string name="text_correct_input">Исправте входные данные перед сохранением</string>
+    <string name="text_name_cannot_be_empty">Имя не может быть пустым</string>
+    <string name="text_building_mark">Создание метки</string>
 </resources>

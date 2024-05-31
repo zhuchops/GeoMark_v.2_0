@@ -14,11 +14,10 @@ import com.zhuchops.geomark_v20.models.GeoLayer;
 
 import java.util.List;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder> {
+public class RecyclerAdapter extends RecyclerView.Adapter<  RecyclerAdapter.RecyclerViewHolder> {
 
     private final OnItemClickListener listener;
     private List<GeoLayer> items;
-    private LayoutInflater inflater;
 
     public interface OnItemClickListener {
         void onItemClick(GeoLayer layer);

@@ -12,7 +12,6 @@ import com.zhuchops.geomark_v20.models.GeoMark;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 public class LayersListViewModel extends AndroidViewModel {
@@ -47,12 +46,16 @@ public class LayersListViewModel extends AndroidViewModel {
         loadLayers();
     }
 
+    public void saveLayers() {
+        fileManager.writeLayers(layers.getValue());
+    }
+
     private void loadLayers() {
         List<GeoLayer> layers = fileManager.readLayers();
         this.layers.setValue(layers);
     }
 
-    public void addLayer(String name, String description, ArrayList<GeoMark> geoMarks) {
+    public void addLayer(String name, String description, List<GeoMark> geoMarks) {
         String id = UUID.randomUUID().toString();
         GeoLayer layer = new GeoLayer(
                 id, new byte[111],
@@ -63,12 +66,10 @@ public class LayersListViewModel extends AndroidViewModel {
         setLayers(layers);
     }
 
-    public void updateCurrentLayer(GeoLayer layer, String name,
-                                   String description, ArrayList<GeoMark> marks) {
-        layer.setName(name);
-        layer.setDescription(description);
-        layer.setMarks(marks);
-        layers.setValue(layers.getValue());
+    public void updateCurrentLayer(GeoLayer oldLayer, GeoLayer updatedLayer) {
+        List<GeoLayer> layers = this.layers.getValue();
+        layers.set(layers.indexOf(oldLayer), updatedLayer);
+        setLayers(layers);
     }
 
     public void setAddLayer(Boolean mode) {
@@ -85,22 +86,37 @@ public class LayersListViewModel extends AndroidViewModel {
         setLayers(layers);
     }
 
-    public void addMarkToLayer(
-            String name, String attitude,
-            String longitude, String description) {
-
-        String id = UUID.randomUUID().toString();
-        GeoMark mark = new GeoMark(
-            id, name, description,
-                Double.parseDouble(attitude), Double.parseDouble(longitude)
-        );
-        Objects.requireNonNull(selectedLayer.getValue()).addMark(mark);
-        setLayers(layers.getValue());
+    public void updateLayer(GeoLayer updatedLayer) {
+        GeoLayer oldLayer = findLayerById(updatedLayer.getId());
+        if (oldLayer != null) {
+            layers.getValue().set(layers.getValue().indexOf(oldLayer), updatedLayer);
+        }
     }
 
-    public void removeMarkFromLayer(GeoMark mark) {
-        Objects.requireNonNull(selectedLayer.getValue()).removeMark(mark);
-
-        setLayers(layers.getValue());
+    public GeoLayer findLayerById(String id) {
+        for (GeoLayer layer:
+             layers.getValue()) {
+            if (layer.getId().equals(id)) return layer;
+        }
+        return null;
     }
+
+//    public void addMarkToLayer(
+//            String name, String attitude,
+//            String longitude, String description) {
+//
+//        String id = UUID.randomUUID().toString();
+//        GeoMark mark = new GeoMark(
+//            id, name, description,
+//                Double.parseDouble(attitude), Double.parseDouble(longitude)
+//        );
+//        Objects.requireNonNull(selectedLayer.getValue()).addMark(mark);
+//        setLayers(layers.getValue());
+//    }
+//
+//    public void removeMarkFromLayer(GeoMark mark) {
+//        Objects.requireNonNull(selectedLayer.getValue()).removeMark(mark);
+//
+//        setLayers(layers.getValue());
+//    }
 }

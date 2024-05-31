@@ -1,6 +1,9 @@
 package com.zhuchops.geomark_v20.models;
 
+import com.yandex.mapkit.geometry.Geo;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class GeoLayer {
     private final String id;
@@ -10,12 +13,13 @@ public class GeoLayer {
     private String description;
 
 
-    public GeoLayer(String id, byte[] imageData, String name, String description, ArrayList<GeoMark> layer) {
+    public GeoLayer(String id, byte[] imageData, String name, String description, List<GeoMark> layer) {
         this.id = id;
         this.imageData = imageData;
         this.name = name;
         this.description = description;
-        this.layer = layer;
+        this.layer = new ArrayList<>();
+        this.layer.addAll(layer);
     }
 
     public void addMark(GeoMark mark) {
@@ -69,8 +73,9 @@ public class GeoLayer {
         this.imageData = imageData;
     }
 
-    public void setMarks(ArrayList<GeoMark> layer) {
-        this.layer = layer;
+    public void setMarks(List<GeoMark> layer) {
+        this.layer.clear();
+        this.layer.addAll(layer);
     }
 
     public void setName(String name) {

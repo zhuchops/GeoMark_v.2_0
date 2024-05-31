@@ -47,7 +47,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.Recy
 
         public RecyclerViewHolder(View itemView) {
             super(itemView);
-            recyclerView = itemView.findViewById(R.id.recycler_view);
+            recyclerView = itemView.findViewById(R.id.layers_recycler_view);
         }
     }
 }
