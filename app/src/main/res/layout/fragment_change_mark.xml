@@ -62,6 +62,8 @@
                     app:counterEnabled="true"
                     app:counterMaxLength="20"
 
+                    android:textColorHint="@color/black"
+
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent">
@@ -77,6 +79,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/change_latitude_field"
 
+                    android:textColorHint="@color/black"
+
                     app:layout_constraintTop_toBottomOf="@id/change_name_field"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent">
@@ -91,6 +95,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/change_longitude_field"
+
+                    android:textColorHint="@color/black"
 
                     app:layout_constraintTop_toBottomOf="@id/change_latitude_field"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -117,6 +123,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/change_description_field"
+
+                    android:textColorHint="@color/black"
 
                     app:layout_constraintTop_toBottomOf="@id/trailTitle"
                     app:layout_constraintLeft_toLeftOf="parent"

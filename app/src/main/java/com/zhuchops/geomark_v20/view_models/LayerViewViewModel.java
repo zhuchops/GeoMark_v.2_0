@@ -66,10 +66,8 @@ public class LayerViewViewModel extends ViewModel {
                 id, name, description,
                 Double.parseDouble(attitude), Double.parseDouble(longitude)
         );
-        layer.getValue().addMark(mark);
         marks.getValue().add(mark);
         marks.setValue(marks.getValue());
-        Log.i("MARK", "mark is added; count of marks is " + layer.getValue().getMarks().size());
     }
 
     public void removeMark(GeoMark mark) {

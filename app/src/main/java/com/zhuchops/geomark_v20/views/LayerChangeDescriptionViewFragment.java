@@ -166,7 +166,7 @@ public class LayerChangeDescriptionViewFragment extends Fragment
 
     private void save() {
         if (binding.changeNameField.getError() == null) {
-            if (layerViewViewModel.getLayer() == null) {
+            if (layerViewViewModel.getLayer().getValue() == null) {
                 layersListViewModel.addLayer(
                         binding.changeNameField.getEditText().getText().toString(),
                         binding.changeDescriptionField.getEditText().getText().toString(),

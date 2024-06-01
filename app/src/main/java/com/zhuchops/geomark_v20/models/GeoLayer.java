@@ -1,33 +1,31 @@
 package com.zhuchops.geomark_v20.models;
 
-import com.yandex.mapkit.geometry.Geo;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class GeoLayer {
     private final String id;
     private byte[] imageData;
-    private ArrayList<GeoMark> layer;
+    private ArrayList<GeoMark> marks;
     private String name;
     private String description;
 
 
-    public GeoLayer(String id, byte[] imageData, String name, String description, List<GeoMark> layer) {
+    public GeoLayer(String id, byte[] imageData, String name, String description, List<GeoMark> marks) {
         this.id = id;
         this.imageData = imageData;
         this.name = name;
         this.description = description;
-        this.layer = new ArrayList<>();
-        this.layer.addAll(layer);
+        this.marks = new ArrayList<>();
+        this.marks.addAll(marks);
     }
 
     public void addMark(GeoMark mark) {
-        this.layer.add(mark);
+        this.marks.add(mark);
     }
 
     public void addMark(int index, GeoMark mark) {
-        this.layer.add(index, mark);
+        this.marks.add(index, mark);
     }
 
     public byte[] getImageData() {
@@ -35,26 +33,26 @@ public class GeoLayer {
     }
 
     public void removeMark(int index) {
-        this.layer.remove(index);
+        this.marks.remove(index);
     }
     public void removeMark(GeoMark mark) {
-        this.layer.remove(mark);
+        this.marks.remove(mark);
     }
 
     public int getSize() {
-        return layer.size();
+        return marks.size();
     }
 
     public void changeMark(int index, GeoMark mark) {
-        this.layer.set(index, mark);
+        this.marks.set(index, mark);
     }
 
     public ArrayList<GeoMark> getMarks() {
-        return layer;
+        return marks;
     }
 
     public GeoMark getMark(int index) {
-        return layer.get(index);
+        return marks.get(index);
     }
 
     public String getName() {
@@ -74,8 +72,8 @@ public class GeoLayer {
     }
 
     public void setMarks(List<GeoMark> layer) {
-        this.layer.clear();
-        this.layer.addAll(layer);
+        this.marks.clear();
+        this.marks.addAll(layer);
     }
 
     public void setName(String name) {
